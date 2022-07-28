@@ -54,16 +54,18 @@ class CountArticle extends Component {
           <button className={styles.input} onClick={this.autoClick}>
             autoClick
           </button>
-          <p>Time in milliseconds:</p>
-          <input
-            className={styles.input}
-            name="time"
-            onChange={this.handlerInput}
-            value={time}
-            type="number"
-            step="500"
-            min="500"
-          />
+          <label>
+            <p>Time in milliseconds:</p>
+            <input
+              className={styles["time-input"]}
+              name="time"
+              onChange={this.handlerInput}
+              value={time}
+              type="number"
+              step="500"
+              min="500"
+            />
+          </label>  
           <p>Step: {step}</p>
         </article>
       </>
