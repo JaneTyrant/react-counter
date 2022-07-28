@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CountArticle from "../CountArticle";
+import styles from "./CountSection.module.css";
 
 class CountSection extends Component {
   constructor(props) {
@@ -18,10 +19,11 @@ class CountSection extends Component {
     const { number } = this.state;
     return (
       <>
-        <section>
-          <article>
-            <h2>STEP</h2>
+        <section className={styles['count-section']}>
+          <article className={styles['step-article']}>
+            <h2 className={styles.step}>step</h2>
             <input
+              className={styles['step-input']}
               name="number"
               onChange={this.handlerInput}
               value={number}
