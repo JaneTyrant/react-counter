@@ -26,6 +26,8 @@ class CountSection extends Component {
               onChange={this.handlerInput}
               value={number}
               type="number"
+              min="1"
+              max="1000000"
             />
           </article>
           <CountArticle number={number} />

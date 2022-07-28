@@ -26,16 +26,17 @@ class CountArticle extends Component {
   };
   autoClick = () => {
     if (this.intervalId === null) {
-      this.setState((state) => {
-        const { time } = state;
-        this.intervalId = setInterval(this.changeNumber, time);
-      });
+      const { time } = this.state;
+      this.intervalId = setInterval(this.changeNumber, time);
     }
   };
   handlerInput = ({ target: { value } }) => {
     const valueToNumber = Number(value);
     this.setState({ time: valueToNumber });
   };
+  componentDidMount(){
+    this.autoClick();
+  }
   render() {
     const { count, time } = this.state;
     const { number } = this.props;
@@ -53,6 +54,8 @@ class CountArticle extends Component {
             onChange={this.handlerInput}
             value={time}
             type="number"
+            step="500"
+            min="500"
           />
           <p>Number: {number}</p>
         </article>
