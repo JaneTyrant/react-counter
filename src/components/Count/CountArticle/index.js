@@ -8,7 +8,6 @@ class CountArticle extends Component {
       count: 0,
       isAdded: true,
       time: 1000,
-      seconds: 0,
     };
     this.intervalId = null;
   }
@@ -27,24 +26,9 @@ class CountArticle extends Component {
     });
   };
   autoClick = () => {
-    const { time, seconds } = this.state;
-    let timeCount = 0;
     if (this.intervalId === null) {
-      this.intervalId = setInterval(() => {
-        if (timeCount < 10) {
-          timeCount++;
-          this.setState({
-            seconds: seconds + timeCount,
-          });
-          this.changeNumber();
-        } else {
-          clearInterval(this.intervalId);
-          this.intervalId = null;
-          this.setState({
-            seconds: 0,
-          });
-        }
-      }, time);
+      const { time } = this.state;
+      this.intervalId = setInterval(this.changeNumber, time);
     }
   };
   handlerInput = ({ target: { value } }) => {
@@ -55,7 +39,7 @@ class CountArticle extends Component {
     this.autoClick();
   }
   render() {
-    const { count, time, seconds } = this.state;
+    const { count, time } = this.state;
     const { step } = this.props;
     return (
       <>
@@ -70,7 +54,6 @@ class CountArticle extends Component {
           <button className={styles.input} onClick={this.autoClick}>
             autoClick
           </button>
-          <p>autoClick time: {seconds}</p>
           <label>
             <p>Time in milliseconds:</p>
             <input
@@ -82,7 +65,7 @@ class CountArticle extends Component {
               step="500"
               min="500"
             />
-          </label>
+          </label>  
           <p>Step: {step}</p>
         </article>
       </>
