@@ -21,9 +21,8 @@ class CountArticle extends Component {
     const { isAdded } = this.state;
     this.setState((state) => {
       const { count } = state;
-      const { number } = this.props;
-      console.log(this.intervalId)
-      return { count: isAdded ? count + number : count - number };
+      const { step } = this.props;
+      return { count: isAdded ? count + step : count - step };
     });
   };
   autoClick = () => {
@@ -36,19 +35,26 @@ class CountArticle extends Component {
     const valueToNumber = Number(value);
     this.setState({ time: valueToNumber });
   };
-  // componentDidMount() {
-  //   this.autoClick();
-  // }
+  componentDidMount() {
+    this.autoClick();
+  }
   render() {
     const { count, time } = this.state;
-    const { number } = this.props;
+    const { step } = this.props;
     return (
       <>
         <article className={styles.article}>
-          <h2>Counter: {count}</h2>
-          <button className={styles.input} onClick={this.mode}>MODE</button>
-          <button className={styles.input} onClick={this.changeNumber}>ADD/SUBTRACT</button>
-          <button className={styles.input} onClick={this.autoClick}>autoClick</button>
+          <h2 className={styles.counter}>Counter: {count}</h2>
+          <button className={styles.input} onClick={this.mode}>
+            MODE
+          </button>
+          <button className={styles.input} onClick={this.changeNumber}>
+            ADD/SUBTRACT
+          </button>
+          <button className={styles.input} onClick={this.autoClick}>
+            autoClick
+          </button>
+          <p>Time in milliseconds:</p>
           <input
             className={styles.input}
             name="time"
@@ -58,7 +64,7 @@ class CountArticle extends Component {
             step="500"
             min="500"
           />
-          <p>Step: {number}</p>
+          <p>Step: {step}</p>
         </article>
       </>
     );

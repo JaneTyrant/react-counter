@@ -6,33 +6,33 @@ class CountSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      number: 1,
+      step: 1,
     };
   }
   handlerInput = ({ target: { value } }) => {
     const valueToNumber = Number(value);
     if (valueToNumber >= 1 && valueToNumber <= 1000000) {
-      this.setState({ number: valueToNumber });
+      this.setState({ step: valueToNumber });
     }
   };
   render() {
-    const { number } = this.state;
+    const { step } = this.state;
     return (
       <>
-        <section className={styles['count-section']}>
-          <article className={styles['step-article']}>
+        <section className={styles["count-section"]}>
+          <article className={styles["step-article"]}>
             <h2 className={styles.step}>step</h2>
             <input
-              className={styles['step-input']}
-              name="number"
+              className={styles["step-input"]}
+              name="step"
               onChange={this.handlerInput}
-              value={number}
+              value={step}
               type="number"
               min="1"
               max="1000000"
             />
           </article>
-          <CountArticle number={number} />
+          <CountArticle step={step} />
         </section>
       </>
     );
