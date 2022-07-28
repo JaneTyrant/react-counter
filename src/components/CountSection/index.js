@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
-import CountArticle from "./../CountArticle";
+import CountArticle from "../CountArticle";
 
 class CountSection extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            number: 1,
+        };
+    }
+    handlerInput = ({ target: { value } }) => {
+        this.setState({ number: Number(value) })
+    }
     render() {
+        const {number} = this.state;
         return (
             <>
                 <section>
                     <article>
                         <h2>STEP</h2>
-                        <input type='number' />
+                        <input 
+                        name="number"
+                        onChange={this.handlerInput}
+                        value={number}
+                        placeholder="password"
+                        type='number' />
                     </article>
-                    <CountArticle />
+                    <CountArticle number={number}/>
                 </section>
             </>
         );
