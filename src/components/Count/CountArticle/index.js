@@ -26,9 +26,18 @@ class CountArticle extends Component {
     });
   };
   autoClick = () => {
+    const { time } = this.state;
+    let timeCount = 0;
     if (this.intervalId === null) {
-      const { time } = this.state;
-      this.intervalId = setInterval(this.changeNumber, time);
+      this.intervalId = setInterval(() => {
+        if (timeCount < 10) {
+          timeCount += 1;
+          this.changeNumber();
+        } else {
+          clearInterval(this.intervalId);
+          this.intervalId = null;
+        }
+      }, time);
     }
   };
   handlerInput = ({ target: { value } }) => {
@@ -65,7 +74,7 @@ class CountArticle extends Component {
               step="500"
               min="500"
             />
-          </label>  
+          </label>
           <p>Step: {step}</p>
         </article>
       </>
