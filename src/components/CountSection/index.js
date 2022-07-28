@@ -9,7 +9,10 @@ class CountSection extends Component {
         };
     }
     handlerInput = ({ target: { value } }) => {
-        this.setState({ number: Number(value) })
+        const valueToNumber = Number(value);
+        if(valueToNumber >= 1 && valueToNumber <= 1000000 ) {
+            this.setState({ number: valueToNumber })
+        }
     }
     render() {
         const {number} = this.state;

@@ -1,38 +1,27 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 class CountArticle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        count: 0,
-        isAdded: true,
+      count: 0,
+      isAdded: true,
     };
   }
   mode = () => {
     const { isAdded } = this.state;
     //isAdded ? this.add() : this.subtract()
     this.setState({
-        isAdded: !isAdded,
-      });
-  }
-  changeNumber = () => {
-    const { isAdded } = this.state;
-    isAdded ? this.add() : this.subtract()
-  }
-  add = () => {
-    this.setState((state) => {
-        const { count } = state;
-        const { number } = this.props;
-        const newCount = count + number;
-        return {count: newCount}
+      isAdded: !isAdded,
     });
   };
-  subtract = () => {
+  changeNumber = () => {
+    const { isAdded } = this.state;
+
     this.setState((state) => {
-        const { count } = state;
-        const { number } = this.props;
-        const newCount = count - number;
-        return {count: newCount}
+      const { count } = state;
+      const { number } = this.props;
+      return { count: isAdded ? count + number : count - number };
     });
   };
   render() {
@@ -44,7 +33,6 @@ class CountArticle extends Component {
           <h2>Counter: {count}</h2>
           <button onClick={this.mode}>MODE</button>
           <br></br>
-          {/* <button onClick={this.add}>ADD/SUBTRACT</button> */}
           <button onClick={this.changeNumber}>ADD/SUBTRACT</button>
           <p>Number: {number}</p>
         </article>
@@ -52,17 +40,5 @@ class CountArticle extends Component {
     );
   }
 }
-
-// const CountArticle = (props) => {
-//   const { count } = props;
-//   return (
-//     <article>
-//       <h2>{count}</h2>
-//       <button>MODE</button>
-//       <button>ADD/SUBTRACT</button>
-//       <p>NUMBER</p>
-//     </article>
-//   );
-// };
 
 export default CountArticle;
