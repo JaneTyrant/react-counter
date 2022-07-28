@@ -6,27 +6,40 @@ class CountArticle extends Component {
     this.state = {
       count: 0,
       isAdded: true,
+      time: 1000,
     };
+    this.intervalId = null;
   }
   mode = () => {
     const { isAdded } = this.state;
-    //isAdded ? this.add() : this.subtract()
     this.setState({
       isAdded: !isAdded,
     });
   };
   changeNumber = () => {
     const { isAdded } = this.state;
-
     this.setState((state) => {
       const { count } = state;
       const { number } = this.props;
       return { count: isAdded ? count + number : count - number };
     });
   };
+  autoClick = () => {
+    if (this.intervalId === null) {
+      this.setState((state) => {
+        const { time } = state;
+        this.intervalId = setInterval(this.changeNumber, time);
+      });
+    }
+  };
+  handlerInput = ({ target: { value } }) => {
+    const valueToNumber = Number(value);
+    this.setState({ time: valueToNumber });
+  };
   render() {
-    const { count } = this.state;
+    const { count, time } = this.state;
     const { number } = this.props;
+    console.log(count);
     return (
       <>
         <article>
@@ -34,6 +47,13 @@ class CountArticle extends Component {
           <button onClick={this.mode}>MODE</button>
           <br></br>
           <button onClick={this.changeNumber}>ADD/SUBTRACT</button>
+          <button onClick={this.autoClick}>autoClick</button>
+          <input
+            name="time"
+            onChange={this.handlerInput}
+            value={time}
+            type="number"
+          />
           <p>Number: {number}</p>
         </article>
       </>
