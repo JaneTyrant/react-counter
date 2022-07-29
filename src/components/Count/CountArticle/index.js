@@ -39,7 +39,7 @@ class CountArticle extends Component {
     this.autoClick();
   }
   render() {
-    const { count, time } = this.state;
+    const { count, time, isAdded } = this.state;
     const { step } = this.props;
     return (
       <>
@@ -49,7 +49,7 @@ class CountArticle extends Component {
             MODE
           </button>
           <button className={styles.input} onClick={this.changeNumber}>
-            ADD/SUBTRACT
+            {isAdded ? 'ADD' : 'SUBTRACT'}
           </button>
           <button className={styles.input} onClick={this.autoClick}>
             autoClick
