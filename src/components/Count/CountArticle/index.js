@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./CountArticle.module.css";
+import { PropTypes } from "prop-types";
 
 class CountArticle extends Component {
   constructor(props) {
@@ -71,6 +72,14 @@ class CountArticle extends Component {
       </>
     );
   }
+}
+
+CountArticle.defaultProps = {
+  step: 1,
+}
+
+CountArticle.propTypes = {
+  step: PropTypes.number.isRequired,
 }
 
 export default CountArticle;
